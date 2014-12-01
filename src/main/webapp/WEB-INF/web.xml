@@ -1,0 +1,24 @@
+<web-app version="3.0">
+    <context-param>
+        <param-name>settingOne</param-name>
+        <param-value>foo</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>servletParameterServlet</servlet-name>
+        <servlet-class>io.pandaria.HelloServlet</servlet-class>
+        <init-param>
+            <param-name>database</param-name>
+            <param-value>CustomerSupport111</param-value>
+        </init-param>
+        <init-param>
+            <param-name>server</param-name>
+            <param-value>10.0.12.5</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletParameterServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
