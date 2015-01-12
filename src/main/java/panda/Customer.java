@@ -20,7 +20,7 @@ public class Customer implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name="AddrID")
+    @JoinColumn(name = "AddrID")
     private Address address;
 
     public Customer(String firstName, String lastName) {
