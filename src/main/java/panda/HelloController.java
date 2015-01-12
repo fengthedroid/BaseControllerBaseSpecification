@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.metamodel.SingularAttribute;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HelloController {
@@ -17,8 +16,9 @@ public class HelloController {
     @Autowired
     private CustomerDao customerDao;
 
-    @PersistenceContext
-    EntityManager em;
+    @Autowired
+    private AddressDao addressDao;
+    private SingularAttribute<Customer, Address> address;
 
     @ResponseBody
     @RequestMapping(value = "/")
@@ -28,17 +28,14 @@ public class HelloController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/customer", params = {"addressID"})
-    public List<Customer> customer(@RequestParam("addressID") String addrID) {
-        return customerDao.findAll();
+    @RequestMapping(value = "/customer")
+    public List<Customer> customer(@RequestParam Map<String, String> allRequestParams) {
+        return customerDao.findAll(new SpecBuilder<Customer>().filterWithOptions(allRequestParams, Customer.class));
     }
 
     @ResponseBody
     @RequestMapping("/address")
-    public List<Address> address() {
-
-        TypedQuery<Address> q = em.createQuery("Select a from Address a", Address.class);
-
-        return q.getResultList();
+    public List<Address> address(@RequestParam Map<String, String> allRequestParams) {
+        return addressDao.findAll(new SpecBuilder<Address>().filterWithOptions(allRequestParams, Address.class));
     }
 }

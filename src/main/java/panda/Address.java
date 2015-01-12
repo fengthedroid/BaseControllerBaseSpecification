@@ -15,7 +15,7 @@ public class Address implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String Street;
+    private String street;
 
     public Address() {
     }
@@ -28,7 +28,7 @@ public class Address implements Serializable{
         Address address = (Address) o;
 
         if (id != address.id) return false;
-        if (Street != null ? !Street.equals(address.Street) : address.Street != null) return false;
+        if (street != null ? !street.equals(address.street) : address.street != null) return false;
 
         return true;
     }
@@ -36,7 +36,7 @@ public class Address implements Serializable{
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (Street != null ? Street.hashCode() : 0);
+        result = 31 * result + (street != null ? street.hashCode() : 0);
         return result;
     }
 
@@ -49,10 +49,10 @@ public class Address implements Serializable{
     }
 
     public String getStreet() {
-        return Street;
+        return street;
     }
 
     public void setStreet(String street) {
-        Street = street;
+        this.street = street;
     }
 }
