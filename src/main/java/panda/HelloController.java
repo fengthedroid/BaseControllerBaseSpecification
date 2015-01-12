@@ -26,7 +26,6 @@ public class HelloController {
         return "Ok";
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/customer")
     public List<Customer> customer(@RequestParam Map<String, String> allRequestParams) {
